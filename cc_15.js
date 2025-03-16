@@ -86,3 +86,23 @@ document.querySelectorAll(".riskCard").forEach(card => {
 // Task 4 Test Cases
 addRiskItem("Cybersecurity Threat", "High", "IT");
 addRiskItem("HR Compliance Issue", "Low", "Human Resources");
+
+// Task 5 - Bulk Risk Updates (Increasing Risk Levels)
+document.getElementById("increaseRiskLevels").addEventListener("click", function() {
+    document.querySelectorAll(".riskCard").forEach(card => {
+        const levelElement = card.querySelector(".level");
+        let currentLevel = levelElement.textContent.replace("Risk Level: ", "");
+
+        if (currentLevel === "Low") {
+            levelElement.textContent = "Risk Level: Medium";
+            applyRiskColor(card, "Medium");
+        } else if (currentLevel === "Medium") {
+            levelElement.textContent = "Risk Level: High";
+            applyRiskColor(card, "High");
+        }
+        // High stays the same
+    });
+});
+
+// Task 5 Test Case
+addRiskItem("Employee Retention", "Low", "HR");
