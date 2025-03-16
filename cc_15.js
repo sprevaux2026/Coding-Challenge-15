@@ -32,3 +32,27 @@ function addRiskItem(riskName, riskLevel, department) {
   addRiskItem("Data Breach", "High", "IT");
   addRiskItem("Supply Chain Disruption", "Medium", "Operations");
   
+ // Task 3 - Adding Resolve button functionality separately
+// Add Resolve button to each existing and future risk cards
+function addResolveButton(riskCard) {
+    const resolveButton = document.createElement("button");
+    resolveButton.textContent = "Resolve";
+  
+    resolveButton.addEventListener("click", function() {
+        riskDashboard.removeChild(riskCard);
+    });
+  
+    riskCard.appendChild(resolveButton);
+}
+
+// Update existing addRiskItem to include Resolve button 
+const originalAddRiskItem = addRiskItem;
+addRiskItem = function(riskName, riskLevel, department) {
+    originalAddRiskItem(riskName, riskLevel, department);
+  
+    const lastRiskCard = riskDashboard.lastElementChild;
+    addResolveButton(lastRiskCard);
+};
+
+// Task 3 Test Case
+addRiskItem("Market Fluctuations", "High", "Finance");
