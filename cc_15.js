@@ -106,3 +106,20 @@ document.getElementById("increaseRiskLevels").addEventListener("click", function
 
 // Task 5 Test Case
 addRiskItem("Employee Retention", "Low", "HR");
+
+// Task 6 - Handling Event Propagation (Preventing unintended dashboard clicks)
+riskDashboard.addEventListener("click", function(event) {
+    if (event.target.tagName === "BUTTON") {
+        event.stopPropagation();
+    }
+});
+
+//update resolve button to explicitly prevent event propagation
+const originalAddResolveButton = addResolveButton;
+addResolveButton = function(riskCard) {
+    originalAddResolveButton(riskCard);
+    const resolveButton = riskCard.querySelector("button");
+    resolveButton.addEventListener("click", function(event) {
+        event.stopPropagation();
+    });
+};
